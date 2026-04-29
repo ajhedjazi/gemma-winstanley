@@ -1,0 +1,230 @@
+const siteHeader = document.querySelector(".site-header");
+const navToggle = document.querySelector(".nav-toggle");
+const siteMenu = document.querySelector(".site-nav");
+const yearNodes = document.querySelectorAll(".js-year");
+const floatingWhatsAppButton = document.querySelector(".floating-whatsapp-button");
+const floatingTopButton = document.querySelector(".floating-top-button");
+const faqGroups = document.querySelectorAll(".faq-list");
+const megaNavItem = document.querySelector(".nav-item-mega");
+const megaTrigger = document.querySelector(".mega-trigger");
+const testimonialsCarousel = document.querySelector("[data-testimonials-carousel]");
+
+if (yearNodes.length > 0) {
+    const currentYear = new Date().getFullYear();
+    yearNodes.forEach((node) => {
+        node.textContent = currentYear;
+    });
+}
+
+if (navToggle && siteHeader && siteMenu) {
+    navToggle.addEventListener("click", () => {
+        const isOpen = siteHeader.classList.toggle("menu-open");
+        navToggle.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    siteMenu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+            siteHeader.classList.remove("menu-open");
+            navToggle.setAttribute("aria-expanded", "false");
+        });
+    });
+
+    document.addEventListener("click", (event) => {
+        const clickedInsideHeader = siteHeader.contains(event.target);
+        if (!clickedInsideHeader) {
+            siteHeader.classList.remove("menu-open");
+            navToggle.setAttribute("aria-expanded", "false");
+        }
+    });
+
+    window.addEventListener("resize", () => {
+        if (window.innerWidth > 860) {
+            siteHeader.classList.remove("menu-open");
+            navToggle.setAttribute("aria-expanded", "false");
+        }
+    });
+}
+
+if (megaNavItem && megaTrigger) {
+    const setMegaOpen = (isOpen) => {
+        megaNavItem.classList.toggle("is-open", isOpen);
+        megaTrigger.setAttribute("aria-expanded", String(isOpen));
+    };
+
+    const isDesktop = () => window.innerWidth > 860;
+
+    megaTrigger.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        setMegaOpen(!megaNavItem.classList.contains("is-open"));
+    });
+
+    megaNavItem.addEventListener("mouseenter", () => {
+        if (isDesktop()) {
+            setMegaOpen(true);
+        }
+    });
+
+    megaNavItem.addEventListener("mouseleave", () => {
+        if (isDesktop()) {
+            setMegaOpen(false);
+        }
+    });
+
+    megaNavItem.addEventListener("focusin", () => {
+        if (isDesktop()) {
+            setMegaOpen(true);
+        }
+    });
+
+    megaNavItem.addEventListener("focusout", (event) => {
+        if (!megaNavItem.contains(event.relatedTarget)) {
+            setMegaOpen(false);
+        }
+    });
+
+    document.addEventListener("click", (event) => {
+        if (!megaNavItem.contains(event.target)) {
+            setMegaOpen(false);
+        }
+    });
+
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+            setMegaOpen(false);
+        }
+    });
+
+    window.addEventListener("resize", () => {
+        setMegaOpen(false);
+    });
+}
+
+if (floatingTopButton || floatingWhatsAppButton) {
+    const updateFloatingButtonVisibility = () => {
+        if (floatingWhatsAppButton) {
+            floatingWhatsAppButton.classList.toggle("is-visible", window.scrollY > 300);
+        }
+
+        if (floatingTopButton) {
+            floatingTopButton.classList.toggle("is-visible", window.scrollY > 520);
+        }
+    };
+
+    updateFloatingButtonVisibility();
+    window.addEventListener("scroll", updateFloatingButtonVisibility, { passive: true });
+}
+
+faqGroups.forEach((group) => {
+    const items = Array.from(group.querySelectorAll(".faq-item"));
+    items.forEach((item) => {
+        item.addEventListener("toggle", () => {
+            if (!item.open) {
+                return;
+            }
+
+            items.forEach((otherItem) => {
+                if (otherItem !== item) {
+                    otherItem.open = false;
+                }
+            });
+        });
+    });
+});
+
+if (testimonialsCarousel) {
+    const testimonialsTrack = testimonialsCarousel.querySelector(".testimonials-track");
+    const previousButton = testimonialsCarousel.querySelector(".testimonial-arrow-prev");
+    const nextButton = testimonialsCarousel.querySelector(".testimonial-arrow-next");
+
+    // Add or edit reviews here
+    const testimonialsData = [
+        {
+            name: "Keran",
+            review: "I love my brows so much, and it was a pain-free treatment too. Very professional.",
+        },
+        {
+            name: "Michelle",
+            review: "One of the best beauty investments I've made. I've had so many compliments on my brows since Gemma did them.",
+        },
+        {
+            name: "Nicola C.",
+            review: "Getting my very light blonde eyebrows tattooed by Gemma was the best decision I ever made. It has completely transformed my face and looks perfect.",
+        },
+        {
+            name: "Sophie C.",
+            review: "Absolutely love my brows. My only regret is not having them done sooner. Gemma is incredibly talented and has a real eye for perfection.",
+        },
+    ];
+
+    let currentIndex = 0;
+
+    const getSlidesPerView = () => {
+        if (window.innerWidth <= 640) {
+            return 1;
+        }
+
+        if (window.innerWidth <= 1040) {
+            return 2;
+        }
+
+        return 4;
+    };
+
+    const renderTestimonials = () => {
+        testimonialsTrack.innerHTML = testimonialsData
+            .map(
+                (item) => `
+                    <article class="testimonial-slide">
+                        <div class="testimonial-entry">
+                            <div class="testimonial-meta">
+                                <span class="testimonial-stars" aria-label="5 star review">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                                <span class="testimonial-name">${item.name}</span>
+                            </div>
+                            <p class="testimonial-quote">&ldquo;${item.review}&rdquo;</p>
+                        </div>
+                    </article>
+                `
+            )
+            .join("");
+    };
+
+    const updateCarousel = () => {
+        const slides = Array.from(testimonialsTrack.children);
+        const slidesPerView = getSlidesPerView();
+        const maxIndex = Math.max(0, testimonialsData.length - slidesPerView);
+
+        currentIndex = Math.min(currentIndex, maxIndex);
+
+        const firstSlide = slides[0];
+        if (!firstSlide) {
+            return;
+        }
+
+        const slideWidth = firstSlide.getBoundingClientRect().width;
+        const trackStyles = window.getComputedStyle(testimonialsTrack);
+        const gap = parseFloat(trackStyles.columnGap || trackStyles.gap || "0");
+        const offset = currentIndex * (slideWidth + gap);
+
+        testimonialsTrack.style.transform = `translateX(-${offset}px)`;
+        previousButton.disabled = currentIndex === 0;
+        nextButton.disabled = currentIndex >= maxIndex;
+    };
+
+    previousButton.addEventListener("click", () => {
+        const slidesPerView = getSlidesPerView();
+        currentIndex = Math.max(0, currentIndex - slidesPerView);
+        updateCarousel();
+    });
+
+    nextButton.addEventListener("click", () => {
+        const slidesPerView = getSlidesPerView();
+        const maxIndex = Math.max(0, testimonialsData.length - slidesPerView);
+        currentIndex = Math.min(maxIndex, currentIndex + slidesPerView);
+        updateCarousel();
+    });
+
+    renderTestimonials();
+    updateCarousel();
+    window.addEventListener("resize", updateCarousel);
+}
