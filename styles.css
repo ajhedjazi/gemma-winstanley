@@ -1700,6 +1700,12 @@ h3 {
     gap: 1.15rem;
 }
 
+.contact-panel-group-details {
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+}
+
 .contact-panel-heading {
     margin-bottom: 0;
 }
@@ -1708,6 +1714,16 @@ h3 {
     display: grid;
     gap: 20px;
     padding: 28px;
+}
+
+.contact-side-image {
+    flex: 1 1 auto;
+    min-height: 260px;
+}
+
+.contact-side-image img {
+    height: 100%;
+    object-fit: cover;
 }
 
 .mini-note {
