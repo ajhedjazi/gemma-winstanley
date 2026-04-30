@@ -85,8 +85,11 @@
                         <p class="eyebrow">Send a message</p>
                         <h2>Contact form</h2>
                     </div>
-                    <form class="panel-card contact-panel" name="contact" method="POST" action="thank-you.html" data-netlify="true">
+                    <form class="panel-card contact-panel" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you.html">
                         <input type="hidden" name="form-name" value="contact">
+                        <p hidden>
+                          <label>Don't fill this out: <input name="bot-field"></label>
+                        </p>
                         <p>Fill in the form below and include any treatment details or questions you would like help with.</p>
                         <label><strong>Name</strong><br><input type="text" name="name" required></label>
                         <label><strong>Email</strong><br><input type="email" name="email" required></label>
@@ -217,4 +220,3 @@
     </a>
 </body>
 </html>
-
