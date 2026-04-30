@@ -1644,6 +1644,10 @@ h3 {
     gap: 24px;
 }
 
+.reviews-intro-copy {
+    margin-bottom: clamp(2rem, 3vw, 2.5rem);
+}
+
 .treatment-detail {
     display: grid;
     grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
