@@ -236,6 +236,7 @@ if (testimonialsCarousel) {
     ];
 
     let currentIndex = 0;
+    let testimonialsInitialized = false;
 
     const getSlidesPerView = () => {
         if (window.innerWidth <= 640) {
@@ -289,20 +290,48 @@ if (testimonialsCarousel) {
         nextButton.disabled = currentIndex >= maxIndex;
     };
 
-    previousButton.addEventListener("click", () => {
-        const slidesPerView = getSlidesPerView();
-        currentIndex = Math.max(0, currentIndex - slidesPerView);
-        updateCarousel();
-    });
+    const initializeTestimonials = () => {
+        if (testimonialsInitialized) {
+            return;
+        }
 
-    nextButton.addEventListener("click", () => {
-        const slidesPerView = getSlidesPerView();
-        const maxIndex = Math.max(0, testimonialsData.length - slidesPerView);
-        currentIndex = Math.min(maxIndex, currentIndex + slidesPerView);
-        updateCarousel();
-    });
+        testimonialsInitialized = true;
 
-    renderTestimonials();
-    updateCarousel();
-    window.addEventListener("resize", updateCarousel);
+        previousButton.addEventListener("click", () => {
+            const slidesPerView = getSlidesPerView();
+            currentIndex = Math.max(0, currentIndex - slidesPerView);
+            updateCarousel();
+        });
+
+        nextButton.addEventListener("click", () => {
+            const slidesPerView = getSlidesPerView();
+            const maxIndex = Math.max(0, testimonialsData.length - slidesPerView);
+            currentIndex = Math.min(maxIndex, currentIndex + slidesPerView);
+            updateCarousel();
+        });
+
+        renderTestimonials();
+        updateCarousel();
+        window.addEventListener("resize", updateCarousel);
+    };
+
+    if ("IntersectionObserver" in window) {
+        const testimonialsObserver = new IntersectionObserver(
+            (entries) => {
+                if (!entries.some((entry) => entry.isIntersecting)) {
+                    return;
+                }
+
+                testimonialsObserver.disconnect();
+                initializeTestimonials();
+            },
+            { rootMargin: "240px 0px" }
+        );
+
+        testimonialsObserver.observe(testimonialsCarousel);
+    } else if ("requestIdleCallback" in window) {
+        window.requestIdleCallback(initializeTestimonials, { timeout: 1200 });
+    } else {
+        window.setTimeout(initializeTestimonials, 0);
+    }
 }
