@@ -115,6 +115,13 @@ if (floatingTopButton || floatingWhatsAppButton) {
     window.addEventListener("scroll", updateFloatingButtonVisibility, { passive: true });
 }
 
+if (floatingTopButton) {
+    floatingTopButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+}
+
 faqGroups.forEach((group) => {
     const items = Array.from(group.querySelectorAll(".faq-item"));
     items.forEach((item) => {
