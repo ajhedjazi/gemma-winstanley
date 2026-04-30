@@ -48,39 +48,24 @@ if (navToggle && siteHeader && siteMenu) {
 if (megaNavItem && megaTrigger) {
     const setMegaOpen = (isOpen) => {
         megaNavItem.classList.toggle("is-open", isOpen);
+        megaNavItem.classList.toggle("mega-menu-open", isOpen);
         megaTrigger.setAttribute("aria-expanded", String(isOpen));
     };
 
-    const isDesktop = () => window.innerWidth > 860;
+    const megaPanel = document.getElementById(megaTrigger.getAttribute("aria-controls"));
+
+    if (megaPanel) {
+        megaPanel.querySelectorAll("a").forEach((link) => {
+            link.addEventListener("click", () => {
+                setMegaOpen(false);
+            });
+        });
+    }
 
     megaTrigger.addEventListener("click", (event) => {
         event.preventDefault();
         event.stopPropagation();
         setMegaOpen(!megaNavItem.classList.contains("is-open"));
-    });
-
-    megaNavItem.addEventListener("mouseenter", () => {
-        if (isDesktop()) {
-            setMegaOpen(true);
-        }
-    });
-
-    megaNavItem.addEventListener("mouseleave", () => {
-        if (isDesktop()) {
-            setMegaOpen(false);
-        }
-    });
-
-    megaNavItem.addEventListener("focusin", () => {
-        if (isDesktop()) {
-            setMegaOpen(true);
-        }
-    });
-
-    megaNavItem.addEventListener("focusout", (event) => {
-        if (!megaNavItem.contains(event.relatedTarget)) {
-            setMegaOpen(false);
-        }
     });
 
     document.addEventListener("click", (event) => {
@@ -90,8 +75,9 @@ if (megaNavItem && megaTrigger) {
     });
 
     document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape") {
+        if (event.key === "Escape" && megaNavItem.classList.contains("is-open")) {
             setMegaOpen(false);
+            megaTrigger.focus();
         }
     });
 

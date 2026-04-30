@@ -391,7 +391,8 @@ h3 {
     transition: transform var(--transition);
 }
 
-.nav-item-mega.is-open .nav-chevron {
+.nav-item-mega.is-open .nav-chevron,
+.nav-item-mega.mega-menu-open .nav-chevron {
     transform: rotate(-135deg) translateY(-1px);
 }
 
@@ -428,7 +429,8 @@ h3 {
     transition: opacity var(--transition), transform var(--transition), visibility var(--transition);
 }
 
-.nav-item-mega.is-open .mega-panel {
+.nav-item-mega.is-open .mega-panel,
+.nav-item-mega.mega-menu-open .mega-panel {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
@@ -1866,7 +1868,8 @@ h3 {
         transition: max-height 220ms ease;
     }
 
-    .nav-item-mega.is-open .mega-panel {
+    .nav-item-mega.is-open .mega-panel,
+    .nav-item-mega.mega-menu-open .mega-panel {
         max-height: 1200px;
     }
 
