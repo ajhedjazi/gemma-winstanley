@@ -2445,6 +2445,60 @@ h3 {
     }
 }
 
+@media (max-width: 767px) {
+    .lip-blush-template .page-hero-layout,
+    .lip-blush-template .what-is-layout {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        align-items: stretch;
+    }
+
+    .lip-blush-template .page-hero-copy,
+    .lip-blush-template .what-is-layout .treatment-section-copy {
+        width: 100%;
+        max-width: none;
+    }
+
+    .lip-blush-template .lip-blush-hero-image,
+    .lip-blush-template .what-is-image {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        justify-self: stretch;
+        align-self: stretch;
+    }
+
+    .lip-blush-template .lip-blush-hero-image {
+        order: 2;
+        border-radius: 24px;
+    }
+
+    .lip-blush-template .page-hero-copy {
+        order: 1;
+    }
+
+    .lip-blush-template .lip-blush-hero-image img,
+    .lip-blush-template .what-is-image img {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+
+    .lip-blush-template .cta-panel {
+        width: min(var(--container), var(--content-rail));
+        margin-inline: auto;
+        padding: 1.85rem var(--mobile-block-padding) calc(1.95rem + env(safe-area-inset-bottom));
+    }
+
+    .lip-blush-template .cta-panel .hero-actions {
+        width: 100%;
+    }
+}
+
 @media (max-width: 640px) {
     .testimonial-slide {
         flex-basis: 100%;
