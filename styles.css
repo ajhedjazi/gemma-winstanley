@@ -1224,8 +1224,15 @@ h3 {
 
 .card-grid > .panel-card .image-frame {
     aspect-ratio: 4 / 5;
+    overflow: hidden;
 }
 
+.card-image {
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+}
+
+.card-image img,
 .card-grid > .panel-card .image-frame img {
     width: 100%;
     height: 100%;
@@ -1777,8 +1784,8 @@ h3 {
 }
 
 .treatment-template {
-    --treatment-section-space: clamp(64px, 7vw, 94px);
-    --treatment-flow-space: clamp(0.95rem, 1.8vw, 1.2rem);
+    --treatment-section-space: clamp(72px, 7.8vw, 108px);
+    --treatment-flow-space: clamp(1rem, 1.9vw, 1.28rem);
 }
 
 .treatment-template .section {
@@ -1812,12 +1819,12 @@ h3 {
 }
 
 .treatment-template .page-hero-copy .hero-actions {
-    margin-top: 0.3rem;
+    margin-top: 0.45rem;
 }
 
 .treatment-template .section-heading {
     gap: 0.7rem;
-    margin-bottom: clamp(1.55rem, 2.8vw, 2.1rem);
+    margin-bottom: clamp(1.75rem, 3vw, 2.45rem);
 }
 
 .treatment-template .section-heading p:last-child {
@@ -1827,18 +1834,18 @@ h3 {
 .treatment-template .card-grid,
 .treatment-template .info-grid,
 .treatment-template .faq-list {
-    gap: clamp(16px, 2vw, 24px);
+    gap: clamp(18px, 2.2vw, 26px);
 }
 
 .treatment-template .info-card {
     display: grid;
     align-content: start;
-    gap: 0.72rem;
+    gap: 0.85rem;
 }
 
 .treatment-split-layout,
 .process-layout {
-    gap: clamp(24px, 3vw, 34px);
+    gap: clamp(32px, 4vw, 56px);
     align-items: start;
 }
 
@@ -1867,6 +1874,124 @@ h3 {
 
 .pricing-card.reveal {
     overflow: hidden;
+}
+
+.lip-blush-template .page-hero-layout {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(32px, 4vw, 56px);
+    align-items: center;
+}
+
+.lip-blush-template .what-is-layout {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(32px, 4vw, 56px);
+    align-items: center;
+}
+
+.lip-blush-template .page-hero-copy,
+.lip-blush-template .what-is-layout .treatment-section-copy,
+.lip-blush-template .suitability-text,
+.lip-blush-template .process-section-stack .section-heading {
+    max-width: 38rem;
+}
+
+.lip-blush-hero-image,
+.lip-blush-template .what-is-image {
+    width: min(100%, 470px);
+    justify-self: end;
+    aspect-ratio: 1.02;
+}
+
+.lip-blush-hero-image img,
+.lip-blush-template .what-is-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.lip-blush-template .what-is-image {
+    order: 1;
+    justify-self: start;
+}
+
+.lip-blush-template .what-is-layout .treatment-section-copy {
+    order: 2;
+}
+
+.lip-blush-section-stack,
+.process-section-stack {
+    display: grid;
+    gap: clamp(28px, 3vw, 38px);
+}
+
+.lip-blush-template .suitability-top-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+    gap: clamp(24px, 3vw, 40px);
+    align-items: start;
+}
+
+.lip-blush-template .suitability-card {
+    display: grid;
+    align-content: center;
+    min-height: 100%;
+    width: 100%;
+}
+
+.lip-blush-template .suitability-image,
+.lip-blush-template .process-image {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+}
+
+.lip-blush-template .process-grid {
+    grid-template-columns: repeat(3, minmax(220px, 1fr));
+    order: 1;
+}
+
+.lip-blush-template .process-image {
+    order: 2;
+}
+
+.lip-blush-template .feature-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.lip-blush-benefits-section {
+    padding-top: calc(var(--treatment-section-space) + 12px);
+}
+
+.lip-blush-template .info-card,
+.lip-blush-template .panel-card:not(.pricing-card) {
+    padding: clamp(24px, 2.4vw, 30px);
+}
+
+.lip-blush-template .panel-card p,
+.lip-blush-template .info-card p,
+.lip-blush-template .pricing-copy p,
+.lip-blush-template .section-heading p:last-child {
+    line-height: 1.74;
+}
+
+.lip-blush-template .check-list {
+    gap: 14px;
+}
+
+.lip-blush-template .pricing-card {
+    margin-top: 0.7rem;
+}
+
+.lip-blush-template .pricing-cta {
+    margin-top: clamp(2.3rem, 3.4vw, 3rem);
+    gap: 0;
+}
+
+.lip-blush-template .pricing-cta .button {
+    margin-top: clamp(1.5rem, 2vw, 2rem);
+}
+
+.lip-blush-template .treatment-grid {
+    gap: clamp(22px, 2.6vw, 30px);
 }
 
 .page-hero-layout {
@@ -2268,6 +2393,35 @@ h3 {
         margin-bottom: 1.45rem;
     }
 
+    .lip-blush-template .what-is-layout,
+    .lip-blush-template .suitability-top-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .lip-blush-template .what-is-image,
+    .lip-blush-template .lip-blush-hero-image,
+    .lip-blush-template .suitability-image,
+    .lip-blush-template .process-image {
+        width: 100%;
+        justify-self: stretch;
+    }
+
+    .lip-blush-template .suitability-image {
+        order: 1;
+    }
+
+    .lip-blush-template .suitability-top-grid {
+        order: 2;
+    }
+
+    .lip-blush-template .process-grid {
+        order: 2;
+    }
+
+    .lip-blush-template .process-image {
+        order: 1;
+    }
+
     .treatment-side-image,
     .suitability-image,
     .process-image {
@@ -2391,6 +2545,11 @@ h3 {
 
     .treatment-template .section-heading {
         gap: 0.55rem;
+    }
+
+    .lip-blush-template .feature-grid,
+    .lip-blush-template .process-grid {
+        grid-template-columns: 1fr;
     }
 
     .pricing-value {
