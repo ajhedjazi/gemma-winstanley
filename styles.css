@@ -1,6 +1,9 @@
 :root {
     --bg: #f2ece8;
     --bg-soft: #e8dfd8;
+    --bg-cream: #f7f1ec;
+    --bg-warm: #eee4dc;
+    --bg-muted: #e5d9d0;
     --panel: #fffdfb;
     --panel-strong: #fffdfb;
     --ink: #3e2c23;
@@ -23,6 +26,10 @@
     --mobile-block-padding: 22px;
     --section-space: clamp(76px, 9vw, 118px);
     --transition: 180ms ease;
+    --section-light-bg: linear-gradient(180deg, rgba(247, 241, 236, 0.96), rgba(242, 236, 232, 0.86));
+    --section-warm-bg: linear-gradient(180deg, rgba(238, 228, 220, 0.94), rgba(242, 236, 232, 0.8));
+    --section-muted-bg: linear-gradient(180deg, rgba(229, 217, 208, 0.92), rgba(239, 232, 226, 0.82));
+    --section-deep-bg: linear-gradient(180deg, rgba(74, 52, 34, 0.96), rgba(47, 33, 25, 0.98));
 }
 
 *,
@@ -107,9 +114,24 @@ h3 {
     padding: var(--section-space) 0;
 }
 
+.section-light,
+.page-hero.section-light,
+.hero-section.section-light {
+    background: var(--section-light-bg);
+}
+
+.section-warm,
 .section-soft {
-    background:
-        linear-gradient(180deg, rgba(232, 223, 216, 0.9), rgba(242, 236, 232, 0.7));
+    background: var(--section-warm-bg);
+}
+
+.section-muted {
+    background: var(--section-muted-bg);
+}
+
+.section-deep {
+    background: var(--section-deep-bg);
+    color: var(--white);
 }
 
 .home-main {
@@ -1546,8 +1568,7 @@ h3 {
 }
 
 .cta-band {
-    background:
-        linear-gradient(180deg, rgba(74, 52, 34, 0.96), rgba(47, 33, 25, 0.98));
+    background: var(--section-deep-bg);
     color: var(--white);
 }
 
