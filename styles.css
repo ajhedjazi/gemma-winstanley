@@ -1078,6 +1078,55 @@ h3 {
     max-width: 32rem;
 }
 
+.pricing-card {
+    padding: 0;
+    overflow: hidden;
+}
+
+.pricing-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 22px 28px;
+    border-bottom: 1px solid rgba(214, 204, 196, 0.88);
+}
+
+.pricing-row:last-child {
+    border-bottom: 0;
+}
+
+.pricing-copy {
+    display: grid;
+    gap: 6px;
+}
+
+.pricing-copy h3 {
+    font-size: clamp(1.45rem, 2vw, 1.72rem);
+    line-height: 1.02;
+}
+
+.pricing-copy p {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.pricing-value {
+    flex-shrink: 0;
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(2rem, 3vw, 2.45rem);
+    font-weight: 600;
+    line-height: 1;
+    color: var(--ink);
+    white-space: nowrap;
+}
+
+.pricing-cta {
+    margin-top: 1.5rem;
+}
+
 .treatment-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
 }
@@ -2099,6 +2148,16 @@ h3 {
     .trust-strip-inner span {
         font-size: 0.79rem;
         padding: 0.72rem 0.9rem;
+    }
+
+    .pricing-row {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px 22px;
+    }
+
+    .pricing-value {
+        white-space: normal;
     }
 
     .panel-card,
