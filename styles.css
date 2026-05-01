@@ -1161,6 +1161,14 @@ h3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.pm-featured-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.pm-secondary-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .treatments-offered-heading {
     max-width: 36rem;
     margin-bottom: 1.35rem;
@@ -1877,6 +1885,10 @@ h3 {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
+    .pm-secondary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
     .footer-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -2167,6 +2179,8 @@ h3 {
     .testimonial-grid,
     .feature-grid,
     .treatment-grid,
+    .pm-featured-grid,
+    .pm-secondary-grid,
     .info-grid,
     .footer-grid {
         grid-template-columns: 1fr;
