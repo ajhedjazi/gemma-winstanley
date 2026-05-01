@@ -19,6 +19,8 @@
     --container: 1100px;
     --home-container: 1100px;
     --gutter: 24px;
+    --content-rail: calc(100% - (var(--gutter) * 2));
+    --mobile-block-padding: 22px;
     --section-space: clamp(76px, 9vw, 118px);
     --transition: 180ms ease;
 }
@@ -94,8 +96,9 @@ h3 {
     font-size: clamp(1.55rem, 2.6vw, 2rem);
 }
 
-.container {
-    width: min(var(--container), calc(100% - (var(--gutter) * 2)));
+.container,
+.site-container {
+    width: min(var(--container), var(--content-rail));
     margin: 0 auto;
 }
 
@@ -114,14 +117,15 @@ h3 {
 
 .home-main .container,
 .home-main .hero-content-shell {
-    width: min(var(--home-container), calc(100% - (var(--gutter) * 2)));
+    width: min(var(--home-container), var(--content-rail));
     margin: 0 auto;
 }
 
 .site-header .container,
 .site-footer .container,
 .mega-panel-inner {
-    width: min(var(--home-container), calc(100% - (var(--gutter) * 2)));
+    width: min(var(--home-container), var(--content-rail));
+    margin: 0 auto;
 }
 
 .home-main > .section {
@@ -2074,6 +2078,7 @@ h3 {
 
     :root {
         --gutter: 18px;
+        --mobile-block-padding: 22px;
     }
 
     .home-main {
@@ -2153,7 +2158,7 @@ h3 {
     .pricing-row {
         flex-direction: column;
         align-items: flex-start;
-        padding: 20px 22px;
+        padding: 20px var(--mobile-block-padding);
     }
 
     .pricing-value {
@@ -2164,8 +2169,27 @@ h3 {
     .card-body,
     .info-card,
     .contact-panel,
-    .treatment-detail {
-        padding: 22px;
+    .treatment-detail,
+    .why-choose-card {
+        padding: var(--mobile-block-padding);
+    }
+
+    .panel-card,
+    .info-card,
+    .pricing-card,
+    .faq-item,
+    .contact-panel,
+    .contact-panel-group,
+    .contact-side-image,
+    .cta-panel,
+    .footer-grid,
+    .footer-bottom {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .faq-item {
+        padding-inline: var(--mobile-block-padding);
     }
 
     .brand-copy strong {
