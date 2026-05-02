@@ -1371,6 +1371,7 @@ h3 {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     overflow: hidden;
 }
 
@@ -1954,9 +1955,9 @@ h3 {
 
 .lip-blush-template .suitability-card {
     display: grid;
-    align-content: center;
     min-height: 100%;
     width: 100%;
+
 }
 
 .lip-blush-template .suitability-image,
@@ -2779,3 +2780,20 @@ h3 {
         transform: scale(var(--image-scale, 1));
     }
 }
+
+.lip-blush-template .suitability-text.content-stack {
+    gap: 16px;
+}
+
+.lip-blush-template .suitability-text .section-heading {
+    gap: 6px;
+    margin: 0;
+}
+
+.lip-blush-template .suitability-text p {
+    margin: 0;
+}
+
+.lip-blush-template .panel-card.suitability-card {
+  padding-top: 2.5rem;
+}   
