@@ -12,6 +12,15 @@ const megaTrigger = document.querySelector(".mega-trigger");
 const testimonialsCarousel = document.querySelector("[data-testimonials-carousel]");
 const revealNodes = document.querySelectorAll(".reveal");
 
+const debounce = (callback, delay = 120) => {
+    let timeoutId;
+
+    return (...args) => {
+        window.clearTimeout(timeoutId);
+        timeoutId = window.setTimeout(() => callback(...args), delay);
+    };
+};
+
 if (yearNodes.length > 0) {
     const currentYear = new Date().getFullYear();
     yearNodes.forEach((node) => {
@@ -126,11 +135,11 @@ if (navToggle && siteHeader && siteMenu) {
         }
     });
 
-    window.addEventListener("resize", () => {
+    window.addEventListener("resize", debounce(() => {
         if (window.innerWidth > 860) {
             closeSiteMenu();
         }
-    });
+    }));
 }
 
 if (megaNavItem && megaTrigger) {
@@ -169,24 +178,52 @@ if (megaNavItem && megaTrigger) {
         }
     });
 
-    window.addEventListener("resize", () => {
+    window.addEventListener("resize", debounce(() => {
         setMegaOpen(false);
-    });
+    }));
 }
 
 if (floatingTopButton || floatingWhatsAppButton) {
+    let floatingButtonsTicking = false;
+    let isWhatsAppVisible = false;
+    let isTopButtonVisible = false;
+
     const updateFloatingButtonVisibility = () => {
+        const shouldShowWhatsApp = window.scrollY > 300;
+        const shouldShowTopButton = window.scrollY > 520;
+
         if (floatingWhatsAppButton) {
-            floatingWhatsAppButton.classList.toggle("is-visible", window.scrollY > 300);
+            floatingWhatsAppButton.classList.toggle("is-visible", shouldShowWhatsApp);
         }
 
         if (floatingTopButton) {
-            floatingTopButton.classList.toggle("is-visible", window.scrollY > 520);
+            floatingTopButton.classList.toggle("is-visible", shouldShowTopButton);
         }
+
+        isWhatsAppVisible = shouldShowWhatsApp;
+        isTopButtonVisible = shouldShowTopButton;
+    };
+
+    const requestFloatingButtonVisibilityUpdate = () => {
+        if (floatingButtonsTicking) {
+            return;
+        }
+
+        floatingButtonsTicking = true;
+        window.requestAnimationFrame(() => {
+            const shouldShowWhatsApp = window.scrollY > 300;
+            const shouldShowTopButton = window.scrollY > 520;
+
+            if (shouldShowWhatsApp !== isWhatsAppVisible || shouldShowTopButton !== isTopButtonVisible) {
+                updateFloatingButtonVisibility();
+            }
+
+            floatingButtonsTicking = false;
+        });
     };
 
     updateFloatingButtonVisibility();
-    window.addEventListener("scroll", updateFloatingButtonVisibility, { passive: true });
+    window.addEventListener("scroll", requestFloatingButtonVisibilityUpdate, { passive: true });
 }
 
 if (floatingTopButton) {
@@ -276,6 +313,7 @@ if (testimonialsCarousel) {
 
     let currentIndex = 0;
     let testimonialsInitialized = false;
+    let carouselFrameId = 0;
 
     const getSlidesPerView = () => {
         if (window.innerWidth <= 640) {
@@ -308,25 +346,33 @@ if (testimonialsCarousel) {
     };
 
     const updateCarousel = () => {
-        const slides = Array.from(testimonialsTrack.children);
-        const slidesPerView = getSlidesPerView();
-        const maxIndex = Math.max(0, testimonialsData.length - slidesPerView);
-
-        currentIndex = Math.min(currentIndex, maxIndex);
-
-        const firstSlide = slides[0];
-        if (!firstSlide) {
-            return;
+        if (carouselFrameId) {
+            window.cancelAnimationFrame(carouselFrameId);
         }
 
-        const slideWidth = firstSlide.getBoundingClientRect().width;
-        const trackStyles = window.getComputedStyle(testimonialsTrack);
-        const gap = parseFloat(trackStyles.columnGap || trackStyles.gap || "0");
-        const offset = currentIndex * (slideWidth + gap);
+        carouselFrameId = window.requestAnimationFrame(() => {
+            carouselFrameId = 0;
 
-        testimonialsTrack.style.transform = `translateX(-${offset}px)`;
-        previousButton.disabled = currentIndex === 0;
-        nextButton.disabled = currentIndex >= maxIndex;
+            const slides = Array.from(testimonialsTrack.children);
+            const slidesPerView = getSlidesPerView();
+            const maxIndex = Math.max(0, testimonialsData.length - slidesPerView);
+
+            currentIndex = Math.min(currentIndex, maxIndex);
+
+            const firstSlide = slides[0];
+            if (!firstSlide) {
+                return;
+            }
+
+            const slideWidth = firstSlide.getBoundingClientRect().width;
+            const trackStyles = window.getComputedStyle(testimonialsTrack);
+            const gap = parseFloat(trackStyles.columnGap || trackStyles.gap || "0");
+            const offset = currentIndex * (slideWidth + gap);
+
+            testimonialsTrack.style.transform = `translateX(-${offset}px)`;
+            previousButton.disabled = currentIndex === 0;
+            nextButton.disabled = currentIndex >= maxIndex;
+        });
     };
 
     const initializeTestimonials = () => {
@@ -351,7 +397,7 @@ if (testimonialsCarousel) {
 
         renderTestimonials();
         updateCarousel();
-        window.addEventListener("resize", updateCarousel);
+        window.addEventListener("resize", debounce(updateCarousel));
     };
 
     if ("IntersectionObserver" in window) {
