@@ -1,73 +1,116 @@
-# TASK: Refine homepage popular treatment card visual alignment
+# TASK: Refine treatment cards (background, alignment, hover clipping)
 
 ## Objective
-Polish the homepage “Popular Treatments” card section so the card backgrounds blend cleanly into the white section and the card text aligns consistently across all cards.
+Polish the homepage treatment cards so they:
+- have clean white image backgrounds
+- align consistently across all cards
+- do not clip when hovered
 
-This is a refinement only, not a redesign.
+This is a visual refinement only — no redesign.
 
 ## Guardrails
 - Follow `guardrail.md` and `site-rules.md`.
-- Do not redesign the section.
-- Do not change colours, fonts, copy, images, links, buttons, or section order.
+- Do not redesign the cards.
+- Do not change colours, fonts, buttons, or layout structure.
+- Do not change card order.
 - Do not alter unrelated sections.
-- Keep changes small, reversible, and scoped.
-- Preserve the existing premium aesthetic.
-- Prioritise consistency, readability, and mobile responsiveness.
+- Keep changes small, scoped, and reversible.
+- Preserve the current aesthetic and spacing system.
 
 ## Scope
-Only inspect and edit files directly related to:
-- Homepage “Popular Treatments” section
+Only edit:
 - Treatment card CSS
-- Local spacing/layout rules for this section
+- Treatment card content (Medical Tattoo card only, minor trim)
+- Hover interaction styles for cards
 
 ## Problems to fix
 
-### 1. Card background looks slightly tinted
-The treatment cards currently appear to have a subtle off-white/grey background that sits awkwardly against the white section background.
+---
 
-Fix this by:
-- Making the card background blend cleanly with the parent white background
-- Removing or reducing any unwanted tint, overlay, gradient, or shadow causing the mismatch
-- Preserving the existing border radius and soft border style
-- Keeping the cards premium and clean, not flat or unfinished
+### 1. Remove background from card images
 
-### 2. Treatment card headings and paragraphs do not align consistently
-The card headings and body text currently sit at slightly different vertical positions because image heights/text wrapping differ.
+Currently, treatment card images appear to have a faint background/tint that does not match the white page.
 
-Fix this by:
-- Ensuring all card images use a consistent height/aspect ratio
-- Ensuring all card headings start on the same vertical line across the row
-- Ensuring all card paragraphs start on the same vertical line across the row
-- Using consistent internal spacing between image, heading, and paragraph
-- Keeping card content readable and balanced
+Fix:
+- Ensure all treatment card images sit on a pure white background
+- Remove any background colour, overlay, or tint applied to image containers
+- Ensure images visually blend into the white section
 
-### 3. Heading wrapping
-Some headings wrap onto two lines. Do not force every heading onto one line if it would make the design cramped.
+Do not:
+- Change image sizes
+- Add borders
+- Alter layout
 
-Instead:
-- Make heading behaviour consistent and intentional
-- Keep two-line headings visually balanced where needed
-- Avoid making text too small
-- Only make minor typography/spacing adjustments if necessary
+---
 
-### 4. Card height refinement
-If safe, slightly reduce excess vertical height in the cards by tightening internal spacing.
+### 2. Fix text alignment inconsistency (Medical Tattoo card)
 
-Do not make the cards feel cramped.
+The "Medical Tattoo" card has more text than others, causing misalignment.
+
+Fix by:
+- Slightly reducing the paragraph length ONLY for this card
+- Keep meaning intact but tighten wording
+- Ensure visual alignment with other cards
+
+Do not:
+- Rewrite all cards
+- Change tone or style
+- Reduce font size globally
+
+---
+
+### 3. Fix hover clipping issue
+
+Currently, when hovering over cards, the top of the card is cut off.
+
+This is likely caused by:
+- `overflow: hidden` on parent container
+- transform/translate/scale on hover
+
+Fix by:
+- Ensuring hovered cards are fully visible
+- Adjusting overflow, transform, or container spacing as needed
+- Maintaining the existing hover effect style
+
+Do not:
+- Remove hover effect entirely
+- Dramatically change animation
+
+---
+
+## Implementation guidance
+- Prefer fixing container overflow rather than removing hover effects
+- Ensure sufficient top spacing if cards lift on hover
+- Keep hover smooth and subtle
+- Keep card layout consistent across all cards
+
+---
 
 ## Mobile checks
 Ensure:
-- No horizontal overflow
-- Cards remain readable on smaller screens
-- Text does not become too small
-- Existing mobile layout is not broken
+- No clipping on mobile
+- No overflow issues
+- Cards remain readable
+- Layout remains unchanged
+
+---
 
 ## Acceptance criteria
-- Card backgrounds blend cleanly with the white section background.
-- All card images align consistently.
-- All card headings start at the same vertical position.
-- All card paragraphs start at the same vertical position.
-- Cards feel slightly cleaner and more balanced.
-- No copy, images, links, or unrelated sections are changed.
-- No mobile overflow is introduced.
-- Site still builds/runs successfully.
+- Card images appear on a clean white background
+- No visible tint or mismatch with section background
+- Medical Tattoo card aligns visually with other cards
+- Hovering over cards no longer cuts off the top
+- Hover effect still works smoothly
+- No redesign has occurred
+- No unrelated sections affected
+- No layout breakage
+- Site builds/runs successfully
+
+---
+
+## Final checks
+After making changes, run:
+
+```bash
+git diff
+git status
