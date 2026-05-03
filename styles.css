@@ -1279,14 +1279,15 @@ h3 {
 
 .treatments-offered-grid {
     gap: 24px;
+    padding-top: 4px;
 }
 
 .treatment-showcase-card {
     min-height: 100%;
     border-radius: 16px;
-    overflow: hidden;
+    overflow: visible;
     box-shadow: 0 7px 20px rgba(0, 0, 0, 0.05);
-    background: transparent;
+    background: #fff;
     transform: translateY(0);
     transition:
         transform 0.4s ease,
@@ -1321,6 +1322,7 @@ h3 {
 .treatment-showcase-media {
     position: absolute;
     inset: 0;
+    background: #fff;
 }
 
 .treatment-showcase-media img {
