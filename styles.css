@@ -586,6 +586,7 @@ h3 {
     gap: 16px;
     overflow-x: auto;
     overscroll-behavior-x: contain;
+    padding-top: 4px;
     padding-bottom: 4px;
 }
 
@@ -595,7 +596,7 @@ h3 {
     padding: 10px;
     border: 1px solid rgba(214, 204, 196, 0.96);
     border-radius: 26px;
-    background: rgba(255, 253, 251, 0.94);
+    background: #fff;
     box-shadow: var(--shadow-card);
     transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
 }
@@ -612,7 +613,7 @@ h3 {
     overflow: hidden;
     border-radius: 20px;
     aspect-ratio: 0.96;
-    background: var(--accent-soft);
+    background: #fff;
 }
 
 .mega-card-image img {
