@@ -545,7 +545,7 @@ h3 {
     padding: 24px 28px 24px;
     border: 1px solid rgba(214, 204, 196, 0.96);
     border-radius: 28px;
-    background: var(--panel);
+    background: #ffffff;
     box-shadow: 0 24px 44px rgba(62, 44, 35, 0.09);
 }
 
