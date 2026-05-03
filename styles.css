@@ -2807,4 +2807,64 @@ h3 {
 
 .lip-blush-template .panel-card.suitability-card {
   padding-top: 2.5rem;
-}   
+}
+
+.contact-panel {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.contact-panel > * {
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.contact-panel p {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.contact-panel label {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.contact-panel input,
+.contact-panel textarea {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.contact-panel button,
+.contact-panel .button-primary {
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  white-space: normal;
+}
+
+@media (max-width: 640px) {
+  .contact-panel button,
+  .contact-panel .button-primary {
+    width: 100%;
+  }
+}
+
+.cta-band .container {
+  width: min(var(--home-container), var(--content-rail));
+  margin-inline: auto;
+}
+
+.cta-panel {
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
