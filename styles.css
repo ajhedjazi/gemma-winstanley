@@ -2131,6 +2131,12 @@ h3 {
     line-height: 1.65;
 }
 
+@media (min-width: 761px) {
+    .reviews-grid > .panel-card:not(.reviews-featured-feedback) p {
+        min-height: 4.95em;
+    }
+}
+
 @media (max-width: 760px) {
     .reviews-grid {
         grid-template-columns: 1fr;
