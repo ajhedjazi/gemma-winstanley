@@ -2092,11 +2092,16 @@ h3 {
 }
 
 .reviews-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 24px;
+    display: block;
+    column-count: 2;
+    column-gap: 24px;
 }
 
 .reviews-grid > .panel-card {
+    width: 100%;
+    margin-bottom: 24px;
+    break-inside: avoid;
+    page-break-inside: avoid;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -2112,6 +2117,7 @@ h3 {
 }
 
 .reviews-featured-feedback {
+    column-span: all;
     grid-column: 1 / -1;
     background: linear-gradient(180deg, rgba(247, 241, 236, 0.98), rgba(238, 228, 220, 0.9));
     border-color: rgba(140, 109, 91, 0.28);
@@ -2124,7 +2130,7 @@ h3 {
 
 @media (max-width: 760px) {
     .reviews-grid {
-        grid-template-columns: 1fr;
+        column-count: 1;
     }
 }
 
