@@ -2106,7 +2106,7 @@ h3 {
 .reviews-grid > .panel-card {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0;
     justify-content: flex-start;
 }
 
@@ -2116,7 +2116,7 @@ h3 {
 
 .reviews-grid > .panel-card strong {
     display: block;
-    margin-top: 0;
+    margin-top: 1rem;
 }
 
 .reviews-featured-feedback {
@@ -2129,20 +2129,6 @@ h3 {
     color: var(--ink);
     font-size: clamp(1.15rem, 1.7vw, 1.35rem);
     line-height: 1.65;
-}
-
-.reviews-grid > .reviews-featured-feedback strong {
-    margin-top: 0.25rem;
-}
-
-@media (min-width: 761px) {
-    .reviews-grid > .panel-card:not(.reviews-featured-feedback) p {
-        min-height: 4.95em;
-    }
-
-    .reviews-featured-feedback p {
-        min-height: 1.65em;
-    }
 }
 
 @media (max-width: 760px) {
