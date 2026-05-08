@@ -2096,6 +2096,21 @@ h3 {
     gap: 24px;
 }
 
+.reviews-grid > .panel-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.reviews-grid > .panel-card p {
+    margin: 0;
+}
+
+.reviews-grid > .panel-card strong {
+    display: block;
+    margin-top: 0.45rem;
+}
+
 .reviews-featured-feedback {
     grid-column: 1 / -1;
     background: linear-gradient(180deg, rgba(247, 241, 236, 0.98), rgba(238, 228, 220, 0.9));
