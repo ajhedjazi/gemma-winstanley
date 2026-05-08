@@ -2131,6 +2131,10 @@ h3 {
     line-height: 1.65;
 }
 
+.reviews-grid > .reviews-featured-feedback strong {
+    margin-top: 0.25rem;
+}
+
 @media (min-width: 761px) {
     .reviews-grid > .panel-card:not(.reviews-featured-feedback) p {
         min-height: 4.95em;
