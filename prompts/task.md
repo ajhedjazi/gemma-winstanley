@@ -1,105 +1,90 @@
-TASK: PageSpeed-safe performance improvements for Gemma Winstanley site
+# Task: Fix review quote/name spacing
 
-Goal:
-Improve mobile PageSpeed/Core Web Vitals without changing the visual design, layout, spacing, content, navigation behaviour, or animations unless specifically required for performance safety.
+## Before making changes
+- Read `/prompts/guardrail.md`
+- Read `/prompts/site-rules.md`
+- Make the smallest possible CSS-only change.
+- Do not redesign the reviews section.
+- Do not change the reviews grid, card order, content, colours, shadows, padding, typography size, border radius, header, hero, CTA or footer.
 
-Current PageSpeed issues:
-- FCP: 2.7s
-- LCP: 3.0s
-- TBT: 310ms
-- CLS: 0
-- Forced reflow reported from /script.js
-- Main-thread work: mostly Style & Layout
-- LCP image is /assets/images/hero.webp and PageSpeed says fetchpriority="high" should be applied.
+## Problem
+On `reviews.html`, the spacing between each review quote and the reviewer name is inconsistent.
 
-Important constraints:
-- Do NOT redesign the site.
-- Do NOT alter page layout, spacing, typography, colours, menu design, cards, or content.
-- Do NOT remove visible sections.
-- Keep all changes small, reversible, and performance-focused.
-- Preserve CLS at 0.
-- Avoid risky global refactors.
+In some cards, the reviewer name sits close to the quote.
+In other cards, the reviewer name is pushed much further down.
 
-Please do the following:
+I want the gap between:
+1. the review quote
+2. the reviewer name
 
-1. LCP hero image optimisation
-- Find the hero image on the homepage:
-  /assets/images/hero.webp
-- Ensure the actual above-the-fold hero image has:
-  loading="eager"
-  fetchpriority="high"
-  decoding="async"
-  width and height attributes preserved or added if missing.
-- Do NOT lazy-load the homepage hero image.
-- If there is already a preload for the hero image, avoid duplicating it.
-- If there is no preload, add this inside <head> only on pages where this image is the above-the-fold LCP image:
+to be exactly the same on EVERY review card.
 
-<link rel="preload" as="image" href="/assets/images/hero.webp" type="image/webp" fetchpriority="high">
+This must apply to:
+- standard 2-column review cards
+- featured/full-width review cards
+- short reviews
+- long reviews
 
-2. Do NOT apply high priority to every image
-- Only the above-the-fold LCP hero image should get fetchpriority="high".
-- All below-the-fold images should remain lazy-loaded where appropriate.
+## Required fix
+Update the CSS so every review card uses the same quote-to-name spacing.
 
-3. Fix forced reflow in script.js
-- Inspect /script.js around the reported areas:
-  line ~360
-  line ~180
-  line ~281
-- Look for patterns where JavaScript reads layout values after writing styles/classes, for example:
-  offsetWidth
-  offsetHeight
-  getBoundingClientRect()
-  scrollHeight
-  clientHeight
-  getComputedStyle()
-  immediately after classList changes, style changes, DOM insertions, or animation setup.
+Use one shared spacing rule where possible.
 
-- Refactor these so layout reads happen before layout writes.
-- Batch DOM reads together first, then DOM writes inside requestAnimationFrame().
-- Do not change the user-facing behaviour.
+Specifically:
+- Identify the quote element inside each review card.
+- Identify the reviewer name/author element inside each review card.
+- Remove any CSS causing names to be pushed down or spaced inconsistently.
+- Remove conflicting default margins from quote/name elements.
+- Set the quote margin-bottom to `0`.
+- Set the reviewer name margin-top to one consistent value, e.g. `1rem` or `1.1rem`.
+- Apply this same rule to both standard and featured review cards.
 
-Example pattern to avoid:
+## Important constraints
+Do NOT use:
+- `justify-content: space-between`
+- `margin-top: auto`
+- `min-height` to create the quote/name gap
+- absolute positioning
+- manual positioning of individual cards
+- masonry layout
+- CSS columns
+- `grid-auto-flow: dense`
 
-element.classList.add("active");
-const height = element.scrollHeight;
+Do NOT:
+- push names to the bottom of cards
+- force all cards to the same height
+- create different spacing rules for featured and standard cards
+- change the HTML order
+- change review text
 
-Safer pattern:
+## Expected result
+Every card should have:
+- quote text
+- then the same ample gap
+- then reviewer name
 
-const height = element.scrollHeight;
-requestAnimationFrame(() => {
-  element.classList.add("active");
-});
+The name should always sit naturally below the quote, not at the bottom of the card.
 
-4. Animation safety
-- Check scroll reveal / appear-on-scroll code.
-- Make sure it uses IntersectionObserver, not scroll listeners that constantly calculate layout.
-- If scroll listeners exist, replace with IntersectionObserver where safe.
-- Animate only transform and opacity.
-- Avoid animating height, top, margin, padding, width, or left.
+## Visual check
+After changing CSS, check:
+- Sophie C.
+- Michelle
+- Stacey Jessop featured card
+- Tyna featured card
+- Phil & Carmen P.
+- Sue Wakefield
+- Donna Wright
 
-5. Menu/mega-menu performance safety
-- If any menu scripts calculate widths/heights on hover or scroll, cache measurements where possible.
-- Avoid repeated layout reads during mousemove, scroll, resize, or hover.
-- Do not alter the visual layout of the mega menu.
+All should have the same gap between quote and name.
 
-6. Resize handling
-- If resize listeners exist, debounce them.
-- Avoid recalculating layout on every resize event.
+## Files
+Limit changes to:
+- `styles.css`
+- `reviews.html` only if absolutely necessary
 
-7. Image dimensions
-- Check all key images have width and height attributes or CSS aspect-ratio to prevent layout shift.
-- Do not crop or visually resize images differently.
+## Git
+After changes, run:
 
-8. Testing
-After changes:
-- Run the site locally.
-- Confirm homepage, lip-blush, microblading, treatments, and contact pages still look the same.
-- Confirm mobile nav and mega menu still work.
-- Confirm scroll reveal animations still work.
-- Confirm no layout shift is introduced.
-- Commit and push changes.
-
-Git commands:
-git add .
-git commit -m "Improve PageSpeed performance safely"
+git add reviews.html styles.css
+git commit -m "Fix review quote author spacing"
 git push
