@@ -291,23 +291,118 @@ if (testimonialsCarousel) {
     const previousButton = testimonialsCarousel.querySelector(".testimonial-arrow-prev");
     const nextButton = testimonialsCarousel.querySelector(".testimonial-arrow-next");
 
-    // Add or edit reviews here
     const testimonialsData = [
         {
-            name: "Keran",
-            review: "I love my brows so much, and it was a pain-free treatment too. Very professional.",
+            name: "Sophie C.",
+            review: "Absolutely love my brows &mdash; Gemma took so much care with the shape.",
         },
         {
             name: "Michelle",
-            review: "One of the best beauty investments I've made. I've had so many compliments on my brows since Gemma did them.",
+            review: "One of the best beauty investments I've made. My brows look natural and I've had so many compliments.",
         },
         {
             name: "Nicola C.",
-            review: "Getting my very light blonde eyebrows tattooed by Gemma was the best decision I ever made. It has completely transformed my face and looks perfect.",
+            review: "My brows have completely transformed my face &mdash; the results are perfect.",
         },
         {
-            name: "Sophie C.",
-            review: "Absolutely love my brows. My only regret is not having them done sooner. Gemma is incredibly talented and has a real eye for perfection.",
+            name: "Stacey Jessop",
+            review: "Gemma made me feel completely at ease during my consultation and I love my results.",
+        },
+        {
+            name: "Gemma Jones",
+            review: "I travelled to Hull to have my brows done with Gemma &mdash; it was absolutely worth it.",
+        },
+        {
+            name: "Sophia Sharpe",
+            review: "I wouldn't trust anyone else with permanent makeup &mdash; professional, warm and incredibly skilled.",
+        },
+        {
+            name: "Stacey Jessop",
+            review: "Gemma made me feel completely at ease during my consultation and I love my results.",
+        },
+        {
+            name: "Kaleigh Burdall",
+            review: "Gemma gave me my confidence back &mdash; I love my brows.",
+        },
+        {
+            name: "Becky Hadfield",
+            review: "Such a talented perfectionist &mdash; I only wish I'd booked my brows sooner.",
+        },
+        {
+            name: "Kelly Smith",
+            review: "I felt relaxed the whole time and Gemma explained the aftercare clearly.",
+        },
+        {
+            name: "Sophia Sharpe",
+            review: "My brows look beautiful and frame my face perfectly.",
+        },
+        {
+            name: "Jess Thompson",
+            review: "A five-star experience from consultation to aftercare &mdash; I felt informed throughout.",
+        },
+        {
+            name: "Diane Large",
+            review: "Professional, friendly and incredibly reassuring throughout my treatment.",
+        },
+        {
+            name: "Louise Walker",
+            review: "She made me feel completely at ease &mdash; even though I was nervous.",
+        },
+        {
+            name: "Elaine Platten",
+            review: "I'm absolutely thrilled with the results &mdash; well worth the wait.",
+        },
+        {
+            name: "Kristy",
+            review: "I had lip blush with Gemma and I love the soft colour so much.",
+        },
+        {
+            name: "Brenda Ward",
+            review: "Love, love, love my brows &mdash; highly recommend.",
+        },
+        {
+            name: "Tyna",
+            review: "After chemo, this treatment helped me feel like myself again.",
+        },
+        {
+            name: "Phil &amp; Carmen P.",
+            review: "Amazing results and such a lovely, welcoming experience.",
+        },
+        {
+            name: "Sue Wakefield",
+            review: "She corrected my brows after a bad experience &mdash; I'm now delighted with the shape.",
+        },
+        {
+            name: "Kym Bunn",
+            review: "I finally have brows again after years &mdash; such a confidence boost.",
+        },
+        {
+            name: "Nicola Tekce",
+            review: "I cannot recommend Gemma enough &mdash; the results are incredible.",
+        },
+        {
+            name: "Donna Wright",
+            review: "Just had my brows finished today and I absolutely love them. Gemma makes you feel completely at ease and talks you through the full process.",
+        },
+        {
+            name: "Julie",
+            review: "She made me feel complete again after a difficult time.",
+        },
+        {
+            name: "Jayne",
+            review: "Incredibly talented &mdash; I was amazed when I saw my brows.",
+        },
+        {
+            name: "Donna Weber",
+            review: "Such meaningful work &mdash; a truly positive experience.",
+        },
+        {
+            name: "Julie Rawson",
+            review: "Professional, informative and gave me exactly the natural result I wanted.",
+        },
+        {
+            name: "Emma Clarkson",
+            review: "Friendly, skilled and instantly puts you at ease from the moment you arrive.",
         },
     ];
 
